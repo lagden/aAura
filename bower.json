@@ -8,7 +8,6 @@
   ],
   "dependencies": {
     "requirejs": "~2.1.8",
-    "jquery": "1.10.x",
     "gsap": "git@github.com:greensock/GreenSock-JS.git#~1.10.2"
   }
 }

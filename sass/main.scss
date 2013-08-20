@@ -1,16 +1,12 @@
 @charset "UTF-8";
 
 @import "compass";
+@import "http://fonts.googleapis.com/css?family=Open+Sans:300,400";
 
 html{
-    background-color: gray;
-    color: white;
-}
-
-h1{
-    position: absolute;
-    top: 50%;
-    left: 50%;
+    background-color: white;
+    color: black;
+    font: 12px/1.7 'open sans', sans-serif;
 }
 
 // Loading
@@ -42,7 +38,104 @@ h1{
     }
 }
 
+// Form
+.gera-input
+{
+    @include appearance(none);
+    font: 12px/1.7 'open sans', sans-serif;
+    color: #333;
+    padding: 7px;
+    width: 150px;
+    border: 1px solid #e2e2e2;
+    outline: 0;
+    margin: 0;
+    &:focus
+    {
+        border: 1px solid #ccc;
+    }
+}
+.gera-button
+{
+    width: 70px;
+    height: 36px;
+    border: 0;
+    border-radius: 1px;
+    background-color: blue;
+    outline: none;
+    color: white;
+    font-weight: bold;
+    &:hover
+    {
+        background-color: red;
+    }
+}
+
+// Helper
+$base-spacing-unit: 20px;
 .hidden{
     visibility: hidden;
     display: none;
+}
+
+.mb{
+    margin-bottom: $base-spacing-unit;
+}
+
+// Media
+.media{
+    @include clearfix;
+    display: block;
+}
+
+.media__img{
+    float: left;
+    margin-right: $base-spacing-unit;
+}
+
+.media__img--rev{
+    float: right;
+    margin-left: $base-spacing-unit;
+}
+
+.media__img img,
+.media__img--rev img{
+    display: block;
+}
+
+.media__body{
+    overflow: hidden;
+}
+
+.media__body,
+.media__body > :last-child{
+    margin-bottom: 0;
+}
+
+// Custom Media
+$size: 100px;
+.media{
+    .media__img{
+        @include border-radius(50%);
+        width: $size;
+        height: $size;
+    }
+}
+
+// Nav
+.nav{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    margin-left: 0;
+    @include clearfix;
+    > li{
+        @extend .mb;
+        margin-left: $base-spacing-unit;
+        &,
+        > a{
+            display: inline-block;
+            *display: inline;
+            zoom: 1;
+        }
+    }
 }

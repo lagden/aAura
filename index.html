@@ -7,8 +7,25 @@
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
-    <div id="loading" class="loading">
-        <div class="spinner"></div>
-    </div>
+    <h1>Semeador de usuário</h1>
+
+    <form action="#gera" id="gerador" class="mb">
+        <input type="text" name="semente" class="gera-input"></div>
+        <button type="submit" class="gera-button">♣</button>
+    </form>
+
+    <ul id="frutos" class="nav"></ul>
+
+    <script src="js/lib/require.js"></script>
+    <script>
+        require.config({
+            baseUrl: "js",
+            paths: {
+                // Comente a linha abaixo para voltar a carregar o script não otimizado
+                "semente": "built/semente-built"
+            }
+        });
+        require(['semente']);
+    </script>
 </body>
 </html>
