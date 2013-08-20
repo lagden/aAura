@@ -1,0 +1,60 @@
+#!/usr/bin/env sh
+
+THIS=$(basename $0)
+DIR="$( cd -P "$( dirname "$0" )" && pwd )"
+cd $DIR
+cd ..
+CURR_FOLDER=`pwd`
+
+grunt
+r.js -o js/builds/sample-build.js
+
+ssh -T lagden@lagden.webfactional.com <<EOF
+
+mkdir -p ~/webapps/htdocs/aAura && cd ~/webapps/htdocs/aAura
+
+if [ -d js/built ]
+then
+    rm -rf js/built
+fi
+
+if [ -d js/lib ]
+then
+    rm -rf js/lib
+fi
+
+if [ ! -d .git ]
+then
+  /usr/bin/env -i /usr/bin/git clone https://github.com/lagden/aAura.git ./
+fi
+
+# Pega o branch atual 
+k=\$(/usr/bin/env -i /usr/bin/git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/\1/");
+
+/usr/bin/env -i /usr/bin/git stash
+/usr/bin/env -i /usr/bin/git checkout master
+/usr/bin/env -i /usr/bin/git reset --hard
+/usr/bin/env -i /usr/bin/git pull origin master
+/usr/bin/env -i /usr/bin/git checkout \$k
+
+exit 0
+EOF
+
+echo ""
+echo "Copiando os scritps..."
+scp -r -q js/built lagden@lagden.webfactional.com:~/webapps/htdocs/aAura/js/.
+scp -r -q js/lib lagden@lagden.webfactional.com:~/webapps/htdocs/aAura/js/.
+echo "Copiando os css..."
+echo ""
+scp -r -q css lagden@lagden.webfactional.com:~/webapps/htdocs/aAura/.
+echo " ------------------------------ "
+echo "< Deploy finalizado... Yeahh!! >"
+echo " ------------------------------ "
+echo "        \   ^__^                "
+echo "         \  (oo)\_______        "
+echo "            (__)\       )\/\    "
+echo "                ||----w |       "
+echo "                ||     ||       "
+echo "                                "
+
+exit 0

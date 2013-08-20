@@ -1,0 +1,14 @@
+{
+  "name": "aaura-test",
+  "version": "0.1.0",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {
+    "requirejs": "~2.1.8",
+    "jquery": "1.10.x",
+    "gsap": "git@github.com:greensock/GreenSock-JS.git#~1.10.2"
+  }
+}
